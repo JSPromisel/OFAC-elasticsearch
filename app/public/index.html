@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>OFAC Elasticsearch</title>
+    <meta name="description" content="Literary Classic Search Engine.">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+</head>
+<body>
+
+    <!--Documentation-->
+    <div id="doc-area" style="width: 50%;">
+        <h1 id="main-header">OFAC Sanctioned Entities Search</h1>
+        <h2 id="usage-header">How to Use</h2>
+        <p>
+            This page allows you to search the Office of Foreign Assets Control (OFAC) sanctioned entities list. Type
+            your <em>query</em> into the <strong>Query</strong> search box and then click the <strong>Search</strong>
+            button to get a list of results.
+            To search a specific <em>field</em>, type that field into the <strong>Field</strong> search box. If left blank,
+            the search will be done across all fields. Note that some of the fields are nested, so you will need to use
+            dot notation to access them. For example, to search a country, use <em>addressList.address.country</em>.
+            There is also a <a href="http://localhost:5601">Kibana instance</a> for more detailed exploration of the
+            Elasticsearch index created for this page. On the first visit to the Kibana page, you will have to set the
+            sdnentries index as the default index. You will be prompted to set a default index when visiting the
+            Discover tab.
+        </p>
+    </div>
+
+    <!--Search Area-->
+    <div id="search-area">
+        <h2>Search</h2>
+        <p hidden id="cur-term">Search Term</p>
+        <label>Field: </label>
+        <input id="txt-match" type="text" style="width:200px;">
+        <label>Query: </label>
+        <input id="txt-search" type="text" style="width:200px;">
+        <input id="search-btn" type="button" value="Search" onclick="onSearchClick()">
+    </div>
+
+    <!-- Search Results -->
+    <div id="search-results" ref="searchResults">
+        <h2 id="num-hits">Results</h2>
+        <ol id="search-hits"></ol>
+        <button id="prev-page" onclick="prevPage()" hidden="true">Prev 10 Items</button>
+        <button id="next-page" onclick="nextPage()" hidden="true">Next 10 Items</button>
+    </div>
+
+<script src="app.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+</body>
+</html>
